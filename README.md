@@ -1,4 +1,6 @@
-# filestack-ecommerce
+# Instastack
+
+Node.js/React/Redux/Redux-Saga
 
 ## How to Run the app
 

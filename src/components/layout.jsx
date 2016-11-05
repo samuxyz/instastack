@@ -9,7 +9,14 @@ export default class Layout extends React.Component {
 				<nav className="navbar navbar-white navbar-fixed-top">
 		      <div className="container p-y-1">
 		        <div className="navbar-header">
-		          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		          <button
+								type="button"
+								className="navbar-toggle collapsed"
+								data-toggle="collapse"
+								data-target="#navbar"
+								aria-expanded="false"
+								aria-controls="navbar"
+							>
 			          <span className="sr-only">Toggle navigation</span>
 			          <span className="icon-bar" />
 			          <span className="icon-bar" />

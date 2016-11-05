@@ -6,6 +6,8 @@ logs
 *.log
 *.log.*
 
+# js.map
+*.js.map
 
 # Runtime data
 pids
@@ -34,5 +36,3 @@ node_modules
 
 # Runtime configuration for swagger app
 config/runtime.yaml
-
-

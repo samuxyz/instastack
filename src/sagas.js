@@ -1,14 +1,21 @@
-import {takeLatest, delay} from 'redux-saga';
-import {put, select} from 'redux-saga/effects';
+import {
+	takeLatest,
+	delay
+} from 'redux-saga';
+
+import {
+	put,
+	select
+} from 'redux-saga/effects';
 
 const FILESTACK_URL = 'https://process.filestackapi.com/';
-const fetchImages = () => {
+
+const getFromServer = () => {
 	return fetch('/image')
-		.then(response => response.json())
-		.then(response => {return response});
+		.then(response => response.json());
 }
 
-const postToServer = (url) => {
+const postToServer = url => {
   return fetch('/image', {
     headers: new Headers({
       'Content-Type': 'application/json'
@@ -16,80 +23,75 @@ const postToServer = (url) => {
     method: 'POST',
     body: JSON.stringify(url)
   })
-  .then(response => response.json())
-  .then(response => {return response});
+  .then(response => response.json());
 }
 
 const pick = () => {
    return new Promise(function (resolve, reject) {
-    filepicker.pick(
+    filepicker.pick (
       {
         mimetype: 'image/*',
         container: 'modal',
         services: ['COMPUTER', 'FACEBOOK', 'INSTAGRAM', 'URL', 'IMGUR', 'PICASA'],
         openTo: 'COMPUTER'
       },
-      function(Blob){
+      function (Blob) {
         console.log(JSON.stringify(Blob));
         const handler = Blob.url.substring(Blob.url.lastIndexOf('/') + 1);
         resolve(handler);
       },
-      function(FPError){
+      function (FPError) {
         console.log(FPError.toString());
         reject(FPError.toString());
       }
-    )
-  })
+    );
+  });
 }
 
-export function* loadImages() {
+function* loadImages () {
   try {
     yield delay(1000);
-  	const imageList = yield fetchImages();
-  	yield put({type: 'GET_IMAGES_SUCCESS', payload: imageList});
-  } catch(error) {
-  	yield put({type: 'GET_IMAGES_FAILURE'});
-  } 
+  	const imageList = yield getFromServer();
+  	yield put({ type: 'GET_IMAGES_SUCCESS', payload: imageList });
+  } catch (error) {
+  	yield put({ type: 'GET_IMAGES_FAILURE' });
+  }
 }
 
-export function* postImage() {
+function* postImage () {
   try {
     yield delay(1000);
     const state = yield select();
     const url = FILESTACK_URL + state.get('upload').get('filters') + state.get('upload').get('handle');
-    const result = yield postToServer({url});
-    yield put({type: 'POST_IMAGE_SUCCESS'});
-  } catch(error) {
-    yield put({type: 'POST_IMAGE_FAILURE'});
-  } 
+    const result = yield postToServer({ url });
+    yield put({ type: 'POST_IMAGE_SUCCESS' });
+  } catch (error) {
+    yield put({ type: 'POST_IMAGE_FAILURE' });
+  }
 }
 
-export function* uploadImage() {
+function* uploadImage () {
   try {
     const upload = yield pick();
-    //console.log("hereee");
-    console.log(upload);
     yield put({ type: 'UPLOAD_IMAGE_SUCCESS', payload: upload });
-
-  } catch(error) {
-    yield put({type: 'UPLOAD_IMAGE_FAILURE'});
-  } 
-
+  } catch (error) {
+    yield put({ type: 'UPLOAD_IMAGE_FAILURE' });
+  }
 }
 
-export function* watchGetImages() {
+function* watchGetImages () {
   yield takeLatest('GET_IMAGES', loadImages);
 }
 
-export function* watchPostImage() {
+function* watchPostImage () {
   yield takeLatest('POST_IMAGE', postImage);
 }
 
-export function* watchFilestack() {
+function* watchFilestack () {
   yield takeLatest('UPLOAD_IMAGE', uploadImage);
 }
 
-export default function* rootSaga() {
+export default function* rootSaga () {
   yield [
     watchGetImages(),
     watchPostImage(),

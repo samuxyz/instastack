@@ -1,4 +1,7 @@
-import {Map, List} from 'immutable';
+import {
+	Map,
+	List 
+} from 'immutable';
 
 const INITIAL_STATE = Map({
 	imageList: List([]),
@@ -6,13 +9,13 @@ const INITIAL_STATE = Map({
 		isLoading: false
 	}),
 	upload: Map({
-		handle: '', 
+		handle: '',
 		filters: '',
 
 	})
 });
 
-export default function(state = INITIAL_STATE, action) {
+export default function (state = INITIAL_STATE, action) {
 	switch(action.type) {
 		case 'GET_IMAGES':
 				return state.merge({
@@ -29,8 +32,8 @@ export default function(state = INITIAL_STATE, action) {
 			});
 		case 'UPLOAD_IMAGE_SUCCESS':
 			return state.updateIn(
-				['upload', 'handle'], 
-				'', 
+				['upload', 'handle'],
+				'',
 				handle => action.payload
 			);
 		case 'POST_IMAGE':
@@ -45,14 +48,14 @@ export default function(state = INITIAL_STATE, action) {
 					handle: '',
 					filters: ''
 				},
-				view : {
+				view: {
 					isLoading: false
 				}
 			});
 		case 'SET_FILTERS':
 			return state.updateIn(
-				['upload', 'filters'], 
-				'', 
+				['upload', 'filters'],
+				'',
 				filter => action.payload
 			);
 		default: return state;

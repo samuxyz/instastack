@@ -1,18 +1,14 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Spinner from './spinner';
-//import PureRenderMixin from 'react-addons-pure-render-mixin';
-import {uploadImage, postImage, setFilters} from '../action-creators';
+import { uploadImage, postImage, setFilters } from '../action-creators';
 
 export class Add extends React.Component {
-	constructor(props) {
-    super(props);
-    //this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
+
 	createFilterUrl() {
 		const filterOptions = document.getElementsByClassName('filter-options');
 		let selectedFilters = [];
-		for(let i=0; i < filterOptions.length; i++) {
+		for(let i = 0; i < filterOptions.length; i++) {
 			if(filterOptions[i].checked) {
 				selectedFilters.push(filterOptions[i].value);
 			}
@@ -28,54 +24,52 @@ export class Add extends React.Component {
 	render() {
 		return(
 			<div>
-			{ this.props.isLoading ? <Spinner></Spinner> : 
-			<div className="row">
-				<div className="col-md-offset-2 col-md-8">
-					<div className="panel panel-default">
-							<div className="panel-heading">
-								<h2 className="panel-title text-center">
-								<span className="glyphicon glyphicon-upload"></span> Upload an Image
-								</h2>
-							</div>
-							<div className="panel-body">
-								<form name="product-form" id="product-form" noValidate>
-									<div className="form-group">
-										<label >Filters</label>
-										<div className="checkbox-group" onClick={() => this.createFilterUrl()}>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="sharpen"></input>Sharpen</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="blur"></input>Blur</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="blackwhite"></input>Black & White</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="sepia"></input>Sepia</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="pixelate"></input>Pixelate</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="oil_paint"></input>Oil Paint</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="negative"></input>Negative</label></div>
-										  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="modulate"></input>Modulate</label></div>
+				{this.props.isLoading ?
+					<Spinner></Spinner> :
+					<div className="row">
+						<div className="col-md-offset-2 col-md-8">
+							<div className="panel panel-default">
+								<div className="panel-heading">
+									<h2 className="panel-title text-center">
+										<span className="glyphicon glyphicon-upload" /> Upload an Image
+									</h2>
+								</div>
+								<div className="panel-body">
+									<form name="product-form" id="product-form" noValidate>
+										<div className="form-group">
+											<label >Filters</label>
+											<div className="checkbox-group" onClick={() => this.createFilterUrl()}>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="sharpen" />Sharpen</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="blur" />Blur</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="blackwhite" />Black & White</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="sepia" />Sepia</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="pixelate" />Pixelate</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="oil_paint" />Oil Paint</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="negative" />Negative</label></div>
+											  <div className="checkbox"><label><input type="checkbox" className="filter-options" value="modulate" />Modulate</label></div>
+											</div>
 										</div>
-									</div>
-
-									<div className="form-group ">
-					          <label htmlFor="picture">Picture</label>
-					          <div className="text-center dropup">
-					            <button id="button-upload" type="button" className="btn btn-default filepicker" onClick={() => this.props.uploadImage()}>
-					              Upload <span className="caret"></span>
-					            </button>   
-					          </div>
-					        </div>
-
-					        <div className="form-group text-center">
-								<img src={this.getImageUrl()}></img>
+										<div className="form-group ">
+						          <label htmlFor="picture">Picture</label>
+						          <div className="text-center dropup">
+						            <button id="button-upload" type="button" className="btn btn-default filepicker" onClick={() => this.props.uploadImage()}>
+						              Upload <span className="caret" />
+						            </button>
+						          </div>
+						        </div>
+						        <div className="form-group text-center">
+											<img className="img-responsive" src={this.getImageUrl()}></img>
+										</div>
+										<button type="button" className="btn btn-filestack btn-block" onClick={() => this.props.postImage()}>Submit</button>
+									</form>
+								</div>
 							</div>
-									<button type="button" className="btn btn-filestack btn-block" onClick={() => this.props.postImage()}>Submit</button>
-								</form>
-							</div>
+						</div>
 					</div>
-				</div>
+				}
 			</div>
-			}
-			</div>
-		); 
+		);
 	}
-
 }
 
 function mapStateToProps(state) {
@@ -88,7 +82,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 	return {
 		uploadImage: () => dispatch(uploadImage()),
-		setFilters: (filters) => dispatch(setFilters(filters)),
+		setFilters: filters => dispatch(setFilters(filters)),
 		postImage: () => dispatch(postImage())
 	}
 }

@@ -20,7 +20,7 @@ export default class Layout extends React.Component {
 		        <div id="navbar" className="collapse navbar-collapse">
 		          <ul className="nav navbar-nav navbar-right">
 		            <li><Link to="/add">Upload</Link></li>
-		            <li><a href="#" target="_blank">Blog</a></li>
+		            <li><a href="http://blog.filestack.com/working-with-filepicker/create-an-instagram-app-to-upload-and-share-images/" target="_blank">Blog</a></li>
 		          </ul>
 		        </div>
 		      </div>

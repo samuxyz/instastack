@@ -25,7 +25,7 @@ export class Add extends React.Component {
 		return(
 			<div>
 				{this.props.isLoading ?
-					<Spinner></Spinner> :
+					<Spinner /> :
 					<div className="row">
 						<div className="col-md-offset-2 col-md-8">
 							<div className="panel panel-default">

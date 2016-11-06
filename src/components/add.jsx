@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Spinner from './spinner';
-import { uploadImage, postImage, setFilters } from '../action-creators';
+import {
+	uploadImage,
+	postImage,
+	setFilters
+} from '../action-creators';
 
 export class Add extends React.Component {
 
@@ -18,11 +22,9 @@ export class Add extends React.Component {
 	getImageUrl() {
 		return this.props.image ? `https://process.filestackapi.com/${this.props.filter}${this.props.image}` : ``;
 	}
-	setCaption() {
-		this.props.setCaption(document.getElementById('caption').value);
-	}
+	
 	render() {
-		return(
+		return (
 			<div>
 				{this.props.isLoading ?
 					<Spinner /> :

@@ -16,13 +16,6 @@ export function postImage() {
 	}
 }
 
-export function setCaption(caption) {
-	return {
-		type: 'SET_CAPTION',
-		payload: caption
-	}
-}
-
 export function setFilters(filters) {
 	return {
 		type: 'SET_FILTERS',

@@ -9,6 +9,9 @@ logs
 # js.map
 *.js.map
 
+# Bundle
+/dist/bundle.js 
+
 # Runtime data
 pids
 *.pid

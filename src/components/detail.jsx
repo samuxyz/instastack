@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getImages } from '../action-creators';
-import Spinner from './spinner'
+import Spinner from './spinner';
 
 export class Detail extends React.Component {
 

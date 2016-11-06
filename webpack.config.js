@@ -33,7 +33,7 @@ const common = {
 let config;
 
 switch(process.env.npm_lifecycle_event) {
-	case 'build':
+	case 'server':
 		config = merge(
 		  common,
       {
@@ -48,7 +48,7 @@ switch(process.env.npm_lifecycle_event) {
 			{
 	      devtool: 'eval-source-map'
 	    },
-	    parts.setupCSS(PATHS.css), 
+	    parts.setupCSS(PATHS.css),
 			parts.devServer({
 				host: process.env.host,
 				port: 3000

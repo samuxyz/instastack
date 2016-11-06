@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 
 //accept encoded data as well as json format
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Static files
 app.use(express.static(__dirname + '/dist'));

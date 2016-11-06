@@ -1,6 +1,6 @@
 import {
 	Map,
-	List 
+	List
 } from 'immutable';
 
 const INITIAL_STATE = Map({
@@ -11,7 +11,6 @@ const INITIAL_STATE = Map({
 	upload: Map({
 		handle: '',
 		filters: '',
-
 	})
 });
 

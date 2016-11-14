@@ -15,8 +15,8 @@ import {
 
 import reducer from './reducer';
 import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga'
-import rootSaga from './sagas'
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './sagas';
 // our components
 import Layout from './components/layout';
 import { HomeContainer } from './components/home';
